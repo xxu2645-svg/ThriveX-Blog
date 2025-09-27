@@ -11,6 +11,9 @@ import Masonry from 'react-masonry-css';
 import { getGaodeMapConfigDataAPI } from '@/api/config';
 import './page.scss';
 
+// 强制动态渲染，避免构建时 API 调用
+export const dynamic = 'force-dynamic';
+
 const breakpointColumnsObj = {
   default: 4,
   1024: 3,

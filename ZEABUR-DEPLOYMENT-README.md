@@ -62,6 +62,29 @@ NEXT_PUBLIC_PROJECT_API=/api
 
 如果部署后仍有问题：
 
+### 常见错误及解决方案
+
+#### 1. `ERR_INVALID_URL` 错误
+**错误信息：** `Failed to parse URL from /api/web_config/name/web`
+
+**解决方案：**
+- 这是由于 URL 拼接逻辑问题导致的
+- 代码已修复，现在能正确处理相对路径和绝对路径的拼接
+- 确保环境变量 `NEXT_PUBLIC_PROJECT_API` 设置正确
+
+#### 2. 构建超时错误
+**错误信息：** `Failed to build /album/page... because it took more than 60 seconds`
+
+**根本原因：**
+- 这些页面在构建时会调用外部 API（`getFootprintListAPI`, `getAlbumCatePagingAPI`, `getRssListAPI`）
+- 在 Zeabur 构建环境中，API 服务可能不可用或响应缓慢
+- Next.js 尝试静态生成这些页面，但 API 调用超时导致构建失败
+
+**解决方案：**
+- ✅ 已修复：为相关页面添加 `export const dynamic = 'force-dynamic'`
+- 这些页面现在将使用动态渲染而不是静态生成
+- 构建时不会调用 API，改为在客户端运行时调用
+
 1. **检查网络连接**
    - 确认后端服务是否正常运行
    - 检查防火墙和端口设置

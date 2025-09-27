@@ -12,6 +12,9 @@ import Masonry from 'react-masonry-css';
 import '@/components/ArticleLayout/Waterfall/index.scss';
 import { dayFormat } from '@/utils';
 
+// 强制动态渲染，避免构建时 API 调用
+export const dynamic = 'force-dynamic';
+
 // 瀑布流断点配置
 const breakpointColumnsObj = {
   default: 5,
