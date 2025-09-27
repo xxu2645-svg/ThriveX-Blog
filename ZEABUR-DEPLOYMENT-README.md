@@ -85,6 +85,19 @@ NEXT_PUBLIC_PROJECT_API=/api
 - 这些页面现在将使用动态渲染而不是静态生成
 - 构建时不会调用 API，改为在客户端运行时调用
 
+#### 3. 页面渲染错误
+**错误信息：** `TypeError: Cannot destructure property 'list' of 'a.value' as it is undefined.`
+
+**根本原因：**
+- `/equipment` 和 `/resume` 页面在构建时调用 API
+- 当 API 调用失败时，`data.value` 为 `undefined`
+- 直接解构导致运行时错误
+
+**解决方案：**
+- ✅ 已修复：添加安全检查处理 API 响应
+- 使用可选链操作符和默认值
+- 添加空状态处理，提供良好的用户体验
+
 1. **检查网络连接**
    - 确认后端服务是否正常运行
    - 检查防火墙和端口设置
