@@ -2,22 +2,30 @@
 const nextConfig = {
     // 关闭严格模式
     reactStrictMode: false,
-    // 配置图片来源
+    // 配置图片来源 - 仅允许可信域名
     images: {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '**',
+                hostname: 'liuyuyang.net',
             },
             {
-                protocol: 'http',
-                hostname: '**',
+                protocol: 'https',
+                hostname: 'raw.githubusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'img.shields.io',
             }
         ],
     },
     eslint: {
-        // 即使有 ESLint 错误，构建也会继续，不会因为 ESLint 报错而中断
-        ignoreDuringBuilds: true,
+        // 启用 ESLint 构建时检查，提高代码质量
+        ignoreDuringBuilds: false,
     },
 };
 
